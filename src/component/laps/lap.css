@@ -1,0 +1,10 @@
+
+.Lap {
+    background-color: black;
+    border: 1px solid;
+    width: 390px;
+}
+.btnLap {
+    display: flex;
+    justify-content: space-between;
+}
