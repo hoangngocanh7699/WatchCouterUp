@@ -1,6 +1,6 @@
 
 export default function Buttons(props) {
-  
+
     return (
         <div className="btnStart-reset">
             {props.start ? (<button className="btn-lap" onClick={props.createLap}>Lap</button>) 

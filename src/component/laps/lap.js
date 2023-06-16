@@ -2,9 +2,8 @@ import './lap.css'
 import { useEffect, useRef } from 'react';
 
 export default function Lap(props) {
+
     const setIntervalRef = useRef(null)
-
-
     var initTime = new Date();
 
     const showTimer = (ms) => {
@@ -29,14 +28,15 @@ export default function Lap(props) {
             props.setTime("00:00:00:00");
             clearInterval(setIntervalRef.current);
           }
-        }, 1);
+        }, 10);
+        console.log(setIntervalRef.current)
         return () => clearInterval(setIntervalRef.current);
       }, [props.start]);
 
     return (
         <div className='Lap'>
             {props.time2 != null && <div className="btnLap">
-                <p className="laptime" >Lap 1</p>
+                <p className="laptime" >Lap {props.ind}</p>
                 <p className="laptime">{props.time}</p>
             </div>}
         </div>
