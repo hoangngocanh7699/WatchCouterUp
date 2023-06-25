@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 
 export default function Screen2(props) {
 
-    const setIntervalRef = useRef(null)
+    const intervalRef = useRef(null)
 
     const initTime = new Date();
 
@@ -11,16 +11,16 @@ export default function Screen2(props) {
       if (!props.start) {
         return;
       }
-      clearInterval(setIntervalRef.current)
-      setIntervalRef.current = setInterval(() => {
+      clearInterval(intervalRef.current)
+      intervalRef.current = setInterval(() => {
       var left = props.count + (new Date() - initTime);
         props.setCount(left);
         if (left <= 0) {
           props.setTime("00:00:00:00");
-          clearInterval(setIntervalRef.current);
+          clearInterval(intervalRef.current);
         }
       }, 10);
-        return () => clearInterval(setIntervalRef.current);
+        return () => clearInterval(intervalRef.current);
     }, [props.start]);
 
     return (

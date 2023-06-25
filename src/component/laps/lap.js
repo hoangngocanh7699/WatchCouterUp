@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 
 export default function Lap(props) {
 
-    const setIntervalRef = useRef(null)
+    const intervalRef = useRef(null)
     var initTime = new Date();
 
     const showTimer = (ms) => {
@@ -11,7 +11,7 @@ export default function Lap(props) {
         const second = Math.floor((ms / 1000) % 60).toString().padStart(2, "0");
         const minute = Math.floor((ms / 1000 / 60) % 60).toString().padStart(2, "0");
         props.setTime(
-            `${minute}:${second}:${milliseconds}`
+            `${minute}:${second}:${milliseconds}` // output
         );
     };
 
@@ -19,27 +19,27 @@ export default function Lap(props) {
         if (!props.start) {
           return;
         }
-        clearInterval(setIntervalRef.current)
-        setIntervalRef.current = setInterval(() => {
+        clearInterval(intervalRef.current)
+        intervalRef.current = setInterval(() => {
           var left = props.count + (new Date() - initTime);
           props.setCount(left);
           showTimer(left);
           if (left <= 0) {
             props.setTime("00:00:00:00");
-            clearInterval(setIntervalRef.current);
+            clearInterval(intervalRef.current);
           }
         }, 10);
-        console.log(setIntervalRef.current)
-        return () => clearInterval(setIntervalRef.current);
+        return () => clearInterval(intervalRef.current);
       }, [props.start]);
 
     return (
+      <>
         <div className='Lap'>
-            {props.time2 != null && <div className="btnLap">
-                <p className="laptime" >Lap {props.ind}</p>
+          {(props.idx && props.time !== '00:00:00') && <div className="btnLap">
+                <p className="laptime" >Lap {props.idx}</p>
                 <p className="laptime">{props.time}</p>
-            </div>}
+          </div>}
         </div>
+      </>
     )
-
 }

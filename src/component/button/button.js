@@ -11,3 +11,5 @@ export default function Buttons(props) {
         </div>
     );
   }
+
+//Toan tu 3 ngoi => Render UI co dieu kien => Lap 

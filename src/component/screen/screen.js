@@ -32,8 +32,8 @@ export default function Screen() {
   }
 
   const createLap = () => {
-    setLaps([...laps, time])
-    setLapTime([...lapTime, time])
+    setLaps([time,...laps])
+    setLapTime([time,...lapTime])
   }
 
   return (
@@ -49,7 +49,7 @@ export default function Screen() {
         <Lap time={time} start={start} count={count} setCount={setCount} setTime={setTime} />
         <div className="content-lap"> {laps.length > 0 && laps.map((lap, index)=>{
           return (
-            <Lap time2={index > 0 ? laps[index - 1] : null} time={lap} ind={index}/>
+             <Lap key={index} time2={laps?.length > 0 && laps[index - 1] } time={lap} idx={laps.length - laps.findIndex(x => x === lap)}/>
           )
         })}
         </div>
