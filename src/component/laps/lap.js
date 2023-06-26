@@ -1,3 +1,4 @@
+import { myContant } from '../../constant/constant';
 import './lap.css'
 import { useEffect, useRef } from 'react';
 
@@ -25,7 +26,7 @@ export default function Lap(props) {
           props.setCount(left);
           showTimer(left);
           if (left <= 0) {
-            props.setTime("00:00:00:00");
+            props.setTime(myContant.initialTime);
             clearInterval(intervalRef.current);
           }
         }, 10);
@@ -35,7 +36,7 @@ export default function Lap(props) {
     return (
       <>
         <div className='Lap'>
-          {(props.idx && props.time !== '00:00:00') && <div className="btnLap">
+          {(props.idx && props.time !== myContant.initialTime) && <div className="btnLap">
                 <p className="laptime" >Lap {props.idx}</p>
                 <p className="laptime">{props.time}</p>
           </div>}

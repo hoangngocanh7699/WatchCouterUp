@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import { useEffect, useRef } from "react";
+import { myContant } from "../../constant/constant";
 
 export default function Screen2(props) {
 
@@ -16,7 +17,7 @@ export default function Screen2(props) {
       var left = props.count + (new Date() - initTime);
         props.setCount(left);
         if (left <= 0) {
-          props.setTime("00:00:00:00");
+          props.setTime(myContant.initialTime);
           clearInterval(intervalRef.current);
         }
       }, 10);

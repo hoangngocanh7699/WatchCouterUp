@@ -8,17 +8,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
+import { myContant } from "../../constant/constant";
 
 
 export default function Screen() {
   const [start, setStart] = useState(false);
   const [count, setCount] = useState(0);
-  const [time, setTime] = useState("00:00:00");
+  const [time, setTime] = useState(myContant.initialTime);
   const [laps, setLaps] = useState([])
   const [lapTime, setLapTime] = useState([])
 
   const clearTime = () => {
-    setTime("00:00:00");
+    setTime(myContant.initialTime);
     setCount(0);
     setLaps([])
   };
@@ -45,7 +46,10 @@ export default function Screen() {
             <Screen2 time={time} start={start} count={count} setCount={setCount} setTime={setTime} handleStart={handleStart} />
           </SwiperSlide>
         </Swiper>
-        <Buttons handleStart={handleStart} handleStop={handleStop} start={start} setStart={setStart} clearTime={clearTime} createLap={createLap}/>
+        <div className="buttons">
+          {start ? <Buttons className='btn-lap' title='Lap' onClick={createLap}/> : <Buttons className='btn-reset' title='Reset' onClick={clearTime}/> }
+          {start ? <Buttons className='btn-stop' title='Stop' onClick={handleStop} /> : <Buttons className='btn-start' title='Start' onClick={handleStart}/> }
+        </div>
         <Lap time={time} start={start} count={count} setCount={setCount} setTime={setTime} />
         <div className="content-lap"> {laps.length > 0 && laps.map((lap, index)=>{
           return (
